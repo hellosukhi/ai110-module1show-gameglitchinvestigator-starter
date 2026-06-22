@@ -128,12 +128,25 @@ No, actually, I will have to continue learning about testing and the test proces
 ## 4. What did you learn about Streamlit and state?
 
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
+What I learned about Streamlit and state:
+I learned that Streamlit operates differently than standard scripts because it is stateless by default. Every time a user interacts with a widget, the entire script re-runs from top to bottom. I learned that to keep my game data (like the secret number or score) from resetting during these re-runs, I must use st.session_state. It acts as a persistent memory for the app, allowing it to "remember" variables even when the code executes repeatedly.
 
+Explaining Streamlit to a friend:
+"Think of a Streamlit app like a high-speed performance on stage. Every time you click a button, the entire play starts over from the very first line of the script to update the interface. Because the 'play' resets constantly, the app would normally 'forget' everything. st.session_state is like a magical sticky note on the back of the stage; even when the play resets, the actors can check that note to remember the score or the secret number so the game stays consistent."
 ---
 
 ## 5. Looking ahead: your developer habits
 
 - What is one habit or strategy from this project that you want to reuse in future labs or projects?
-  - This could be a testing habit, a prompting strategy, or a way you used Git.
+
+I want to continue using a "test-first" strategy for edge cases. By forcing myself to think about how the game might break—like with non-integer inputs or extreme values—before finalizing the feature, I ended up with much more stable code. Moving forward, I will prioritize writing pytest cases as part of my initial development phase rather than treating them as an afterthought.
+
+I also want to be sure I can fully debug on my own at the same pace or better than AI, like I want to be better than AI, so using it as a strategy for improvement and constantly learning and managing the jobs, so ultimately I can leverage it better, rather than being mindless.
+
 - What is one thing you would do differently next time you work with AI on a coding task?
+
+Next time, I will ask the AI to explain the logic or architecture of a solution before it generates the full code block. Sometimes I just accept the code, but taking a moment to have the AI "talk through" the logic first would help me better understand how the components fit together and make me more confident in debugging it if something goes wrong.
+
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+
+This project taught me that AI is not a "magic button" that writes perfect software, but rather a collaborator that requires me to act as the lead architect. I realized that my success depends less on the AI's speed and more on my ability to clearly define requirements and rigorously validate the output.

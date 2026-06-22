@@ -40,3 +40,30 @@ def test_get_range_for_difficulty_hard():
     # FIX: Added a focused test for the difficulty mapping;
     # confirms the hard mode range remains correct and predictable.
     assert get_range_for_difficulty("Hard") == (1, 50)
+
+
+def test_parse_guess_accepts_zero_negative_and_large_integers():
+    # verifies the parser treats boundary and extreme integers as valid input.
+    assert parse_guess("0") == (True, 0, None)
+    assert parse_guess("-42") == (True, -42, None)
+    assert parse_guess("999999999999999999999") == (
+        True,
+        999999999999999999999,
+        None,
+    )
+
+
+def test_parse_guess_rejects_malformed_numeric_formats():
+    # verifies malformed inputs are rejected without crashing the game.
+    assert parse_guess("1.5") == (False, None, "That is not a number.")
+    assert parse_guess("1,000") == (False, None, "That is not a number.")
+    assert parse_guess("12abc") == (False, None, "That is not a number.")
+    assert parse_guess("@#") == (False, None, "That is not a number.")
+    assert parse_guess("1e3") == (False, None, "That is not a number.")
+
+
+def test_check_guess_handles_extreme_values():
+    # verifies comparisons stay deterministic even for boundary values.
+    assert check_guess(-100, 0) == "Too Low"
+    assert check_guess(0, 0) == "Win"
+    assert check_guess(10**18, 0) == "Too High"

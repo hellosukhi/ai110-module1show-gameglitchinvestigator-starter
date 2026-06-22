@@ -67,11 +67,6 @@ if "history" not in st.session_state:
 
 st.subheader("Make a guess")
 
-st.info(
-    f"Guess a number between {low} and {high}. "
-    f"Attempts left: {attempt_limit - st.session_state.attempts}"
-)
-
 with st.expander("Developer Debug Info"):
     st.write("Secret:", st.session_state.secret)
     st.write("Attempts:", st.session_state.attempts)
@@ -163,6 +158,15 @@ if submitted:
                 f"The secret was {st.session_state.secret}. "
                 f"Score: {st.session_state.score}"
             )
+
+# FIX: Recalculate remaining attempts after the submission has been processed;
+# this prevents the UI from showing a stale countdown when the final guess is made.
+if st.session_state.status == "playing":
+    attempts_left = max(0, attempt_limit - st.session_state.attempts)
+    st.info(
+        f"Guess a number between {low} and {high}. "
+        f"Attempts left: {attempts_left}"
+    )
 
 st.divider()
 st.caption("Built by an AI that claims this code is production-ready.")
